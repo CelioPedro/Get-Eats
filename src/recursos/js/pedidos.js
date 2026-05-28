@@ -13,11 +13,8 @@ class PedidosManager {
   }
 
   carregarPedidos() {
-    // Carregar pedidos atuais do localStorage
-    this.pedidosAtuais = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
-
-    // Carregar histórico do localStorage
-    this.historicoPedidos = JSON.parse(localStorage.getItem('historico_pedidos') || '[]');
+    this.pedidosAtuais = OrderStorage.getCurrentOrders();
+    this.historicoPedidos = OrderStorage.getHistory();
 
     // Limpar duplicatas do histórico
     this.limparDuplicatasHistorico();
@@ -230,8 +227,7 @@ class PedidosManager {
     // Converter de volta para array
     this.historicoPedidos = Array.from(pedidosUnicos.values());
 
-    // Salvar o histórico limpo no localStorage
-    localStorage.setItem('historico_pedidos', JSON.stringify(this.historicoPedidos));
+    OrderStorage.setHistory(this.historicoPedidos);
   }
 
   verDetalhesPedido(pedidoId) {

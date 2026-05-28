@@ -64,17 +64,13 @@ class DesktopOrderConfirmationManager {
             itens: resumo.quantidadeItens > 0 ? carrinhoManager.carrinho : [],
             total: resumo.total,
             endereco: endereco || (usuarioLogado ? usuarioLogado.endereco : ''),
+            usuarioId: OrderStorage.getUserId(),
             timestampInicio: Date.now(),
             entregador: null // Will be assigned when status changes to "out for delivery"
         };
 
-        // Save to localStorage
-        const pedidosAtuais = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
-        pedidosAtuais.push(pedido);
-        localStorage.setItem('pedidos_atuais', JSON.stringify(pedidosAtuais));
-
-        // Save current order for tracking
-        localStorage.setItem('pedido_atual', JSON.stringify(pedido));
+        OrderStorage.addCurrentOrder(pedido);
+        OrderStorage.setCurrentOrder(pedido);
 
         // Clear cart
         carrinhoManager.limparCarrinho();

@@ -87,11 +87,10 @@ class DesktopOrderTrackingManager {
 
     loadOrderData() {
         // Try to load current order
-        let pedido = JSON.parse(localStorage.getItem('pedido_atual') || 'null');
+        let pedido = OrderStorage.getCurrentOrder();
 
         if (!pedido) {
-            // Fallback to last order from pedidos_atuais
-            const pedidosAtuais = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
+            const pedidosAtuais = OrderStorage.getCurrentOrders();
             if (pedidosAtuais.length > 0) {
                 pedido = pedidosAtuais[pedidosAtuais.length - 1];
             }
@@ -106,12 +105,12 @@ class DesktopOrderTrackingManager {
     loadOrderById(orderId) {
         // Try to find in current orders
         let pedido = null;
-        const pedidosAtuais = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
+        const pedidosAtuais = OrderStorage.getCurrentOrders();
         pedido = pedidosAtuais.find(p => p.id === orderId);
 
         // If not found, try in history
         if (!pedido) {
-            const historicoPedidos = JSON.parse(localStorage.getItem('historico_pedidos') || '[]');
+            const historicoPedidos = OrderStorage.getHistory();
             pedido = historicoPedidos.find(p => p.id === orderId);
         }
 
@@ -215,8 +214,7 @@ class DesktopOrderTrackingManager {
             const delivererIndex = Math.floor(Math.random() * this.deliverers.length);
             this.currentOrder.entregador = this.deliverers[delivererIndex];
 
-            // Update localStorage
-            localStorage.setItem('pedido_atual', JSON.stringify(this.currentOrder));
+            OrderStorage.setCurrentOrder(this.currentOrder);
         }
 
         // Render deliverer info
@@ -244,8 +242,7 @@ class DesktopOrderTrackingManager {
         const newTime = this.currentOrder.timestampInicio - (2 * 60 * 1000); // Subtract 2 minutes
         this.currentOrder.timestampInicio = newTime;
 
-        // Update localStorage
-        localStorage.setItem('pedido_atual', JSON.stringify(this.currentOrder));
+        OrderStorage.setCurrentOrder(this.currentOrder);
 
         // Re-simulate status
         this.simulateStatus();
@@ -258,21 +255,17 @@ class DesktopOrderTrackingManager {
         this.currentOrder.status = 'entregue';
         this.currentOrder.dataEntrega = new Date().toISOString();
 
-        // Add to history
-        const historico = JSON.parse(localStorage.getItem('historico_pedidos') || '[]');
-        historico.push(this.currentOrder);
-        localStorage.setItem('historico_pedidos', JSON.stringify(historico));
+        OrderStorage.addHistoryOrder(this.currentOrder);
 
         // Remove from current orders
-        const pedidosAtuais = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
+        const pedidosAtuais = OrderStorage.getCurrentOrders();
         const index = pedidosAtuais.findIndex(p => p.id === this.currentOrder.id);
         if (index > -1) {
             pedidosAtuais.splice(index, 1);
-            localStorage.setItem('pedidos_atuais', JSON.stringify(pedidosAtuais));
+            OrderStorage.setCurrentOrders(pedidosAtuais);
         }
 
-        // Update localStorage
-        localStorage.setItem('pedido_atual', JSON.stringify(this.currentOrder));
+        OrderStorage.setCurrentOrder(this.currentOrder);
     }
 
     disableUpdateButton() {

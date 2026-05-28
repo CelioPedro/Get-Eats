@@ -44,6 +44,7 @@ class DesktopPedidosManager {
     openModal() {
         if (this.modalOverlay) {
             this.modalOverlay.style.display = 'flex';
+            this.carregarPedidos();
             this.render();
         }
     }
@@ -82,11 +83,8 @@ class DesktopPedidosManager {
     }
 
     carregarPedidos() {
-        // Load current orders from localStorage
-        this.pedidosAtuais = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
-
-        // Load order history from localStorage
-        this.historicoPedidos = JSON.parse(localStorage.getItem('historico_pedidos') || '[]');
+        this.pedidosAtuais = OrderStorage.getCurrentOrders();
+        this.historicoPedidos = OrderStorage.getHistory();
 
         // Clean duplicates from history
         this.limparDuplicatasHistorico();
@@ -255,8 +253,7 @@ class DesktopPedidosManager {
         // Convert back to array
         this.historicoPedidos = Array.from(pedidosUnicos.values());
 
-        // Save the cleaned history to localStorage
-        localStorage.setItem('historico_pedidos', JSON.stringify(this.historicoPedidos));
+        OrderStorage.setHistory(this.historicoPedidos);
     }
 
     verDetalhesPedido(pedidoId) {

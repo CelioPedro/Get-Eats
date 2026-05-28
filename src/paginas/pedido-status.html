@@ -93,6 +93,7 @@
 
   <!-- Scripts necessários -->
   <script src="../recursos/js/auth.js"></script>
+  <script src="../recursos/js/order-storage.js"></script>
   <script src="../recursos/js/carrinho.js"></script>
 
   <script>
@@ -165,8 +166,8 @@
         const pedidoId = urlParams.get('id');
 
         if (pedidoId) {
-          const pedidosAtuais = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
-          const historicoPedidos = JSON.parse(localStorage.getItem('historico_pedidos') || '[]');
+          const pedidosAtuais = OrderStorage.getCurrentOrders();
+          const historicoPedidos = OrderStorage.getHistory();
 
           let pedidoEncontrado = pedidosAtuais.find(p => p.id === pedidoId);
           if (!pedidoEncontrado) {
@@ -192,13 +193,13 @@
             }
             
             // Salvar pedido atual para uso nas funções de status (seja em andamento ou do histórico)
-            localStorage.setItem('pedido_atual', JSON.stringify(pedidoEncontrado));
+            OrderStorage.setCurrentOrder(pedidoEncontrado);
             return;
           }
         }
 
         // Fallback: carregar pedido atual
-        const pedidoAtual = JSON.parse(localStorage.getItem('pedido_atual') || 'null');
+        const pedidoAtual = OrderStorage.getCurrentOrder();
 
         // ... (restante do bloco de fallback carregarDadosPedido mantido como antes) ...
         if (pedidoAtual) {
@@ -207,10 +208,10 @@
           totalPedidoEl.textContent = `R$ ${pedidoAtual.total.toFixed(2).replace('.', ',')}`;
         } else {
           // Fallback para dados antigos
-          let numeroPedido = localStorage.getItem('numero_pedido_atual');
+          let numeroPedido = OrderStorage.get(OrderStorage.baseKeys.number, null);
           if (!numeroPedido) {
             numeroPedido = gerarNumeroPedido();
-            localStorage.setItem('numero_pedido_atual', numeroPedido);
+            OrderStorage.set(OrderStorage.baseKeys.number, numeroPedido);
           }
           numeroPedidoEl.textContent = `#${numeroPedido}`;
 
@@ -222,7 +223,7 @@
             enderecoEntregaEl.textContent = usuarioLogado.endereco;
           }
 
-          let totalPedido = localStorage.getItem('pedido_total_confirmado');
+          let totalPedido = OrderStorage.get(OrderStorage.baseKeys.total, null);
           if (!totalPedido) {
             const resumoCarrinho = carrinhoManager.obterResumo();
             totalPedido = resumoCarrinho.total.toFixed(2).replace('.', ',');
@@ -239,36 +240,29 @@
 
         // Garante que, mesmo no fallback, o entregador seja anexado ao objeto antes de salvar no histórico
         if (!pedido.entregador) {
-            const entregadorIndex = localStorage.getItem('entregador_pedido_atual');
+            const entregadorIndex = OrderStorage.get(OrderStorage.baseKeys.deliverer, null);
             if (entregadorIndex) {
                 pedido.entregador = entregadores[parseInt(entregadorIndex)];
             }
         }
 
         // Adicionar ao histórico
-        const historicoPedidos = JSON.parse(localStorage.getItem('historico_pedidos') || '[]');
-        historicoPedidos.push(pedido);
-        localStorage.setItem('historico_pedidos', JSON.stringify(historicoPedidos));
+        OrderStorage.addHistoryOrder(pedido);
 
         // Remover dos pedidos atuais (se existir)
-        const pedidosAtuais = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
+        const pedidosAtuais = OrderStorage.getCurrentOrders();
         const index = pedidosAtuais.findIndex(p => p.id === pedido.id);
         if (index > -1) {
           pedidosAtuais.splice(index, 1);
-          localStorage.setItem('pedidos_atuais', JSON.stringify(pedidosAtuais));
+          OrderStorage.setCurrentOrders(pedidosAtuais);
         }
 
-        // CORREÇÃO CRÍTICA: Limpar TODAS as chaves de tracking de forma absoluta
-        localStorage.removeItem('pedido_atual');
-        localStorage.removeItem('pedido_status_atual');
-        localStorage.removeItem('entregador_pedido_atual');
-        localStorage.removeItem('pedido_timestamp_inicio'); 
-        localStorage.removeItem('numero_pedido_atual'); 
+        OrderStorage.clearTracking();
       }
 
       // Simular status do pedido baseado no tempo estimado
       function simularStatusPedido() {
-        let pedidoAtual = JSON.parse(localStorage.getItem('pedido_atual') || 'null');
+        let pedidoAtual = OrderStorage.getCurrentOrder();
         const statusFinal = statusPedidos[3]; // 'Entregue'
 
         if (pedidoAtual) {
@@ -313,7 +307,7 @@
                 pedidoAtual.entregador = entregadorEscolhido;
                 
                 // Re-salva o objeto pedido atualizado no localStorage
-                localStorage.setItem('pedido_atual', JSON.stringify(pedidoAtual));
+                OrderStorage.setCurrentOrder(pedidoAtual);
             }
 
           // Se atingiu o status 3 (Entregue) no ciclo atual
@@ -370,7 +364,7 @@
             tempoEstimadoEl.textContent = status.tempo;
           }
 
-          localStorage.setItem('pedido_status_atual', statusAtual.toString());
+          OrderStorage.set(OrderStorage.baseKeys.status, statusAtual.toString());
 
           // Atualizar a exibição do entregador
           if (pedidoAtual.entregador) {
@@ -385,9 +379,9 @@
         } else {
             // --- INÍCIO DO FALLBACK PARA COMPATIBILIDADE ---
             // ... (o bloco de fallback foi mantido, mas é menos relevante agora devido às limpezas) ...
-          const timestampInicio = localStorage.getItem('pedido_timestamp_inicio');
+          const timestampInicio = OrderStorage.get(OrderStorage.baseKeys.timestamp, null);
           if (!timestampInicio) {
-            localStorage.setItem('pedido_timestamp_inicio', Date.now().toString());
+            OrderStorage.set(OrderStorage.baseKeys.timestamp, Date.now().toString());
             return;
           }
 
@@ -426,14 +420,14 @@
             tempoEstimadoEl.textContent = status.tempo;
           }
 
-          localStorage.setItem('pedido_status_atual', statusAtual.toString());
+          OrderStorage.set(OrderStorage.baseKeys.status, statusAtual.toString());
 
           // Escolher entregador (USANDO CHAVES ISOLADAS APENAS NESTE FALLBACK)
           if (statusAtual >= 2) {
-            let entregadorIndex = localStorage.getItem('entregador_pedido_atual');
+            let entregadorIndex = OrderStorage.get(OrderStorage.baseKeys.deliverer, null);
             if (!entregadorIndex) {
               entregadorIndex = Math.floor(Math.random() * entregadores.length);
-              localStorage.setItem('entregador_pedido_atual', entregadorIndex.toString());
+              OrderStorage.set(OrderStorage.baseKeys.deliverer, entregadorIndex.toString());
             }
             const entregador = entregadores[parseInt(entregadorIndex)];
             entregadorNomeEl.textContent = entregador.nome;
@@ -452,11 +446,7 @@
       if (backToHomeBtn) {
         backToHomeBtn.addEventListener('click', function() {
           // Limpar todas as chaves de tracking
-          localStorage.removeItem('pedido_status_atual');
-          localStorage.removeItem('pedido_timestamp_inicio');
-          localStorage.removeItem('numero_pedido_atual');
-          localStorage.removeItem('entregador_pedido_atual');
-          localStorage.removeItem('pedido_atual');
+          OrderStorage.clearTracking();
           window.location.href = 'cardapio.html';
         });
       }
@@ -465,22 +455,22 @@
       if (atualizarBtn) {
         atualizarBtn.addEventListener('click', function() {
           // Avançar status manualmente para demonstração
-          let statusAtual = parseInt(localStorage.getItem('pedido_status_atual') || '0');
+          let statusAtual = parseInt(OrderStorage.get(OrderStorage.baseKeys.status, '0') || '0');
           
               // Proteção adicional para não avançar se já está Entregue
-              const pedidoAtual = JSON.parse(localStorage.getItem('pedido_atual') || 'null');
+              const pedidoAtual = OrderStorage.getCurrentOrder();
               if (pedidoAtual && pedidoAtual.status === 'entregue') return;
               if (statusAtual === 3) return;
 
 
           if (statusAtual < 3) {
             statusAtual++;
-            localStorage.setItem('pedido_status_atual', statusAtual.toString());
+            OrderStorage.set(OrderStorage.baseKeys.status, statusAtual.toString());
             
              // Ajusta o timestamp para simular o tempo (2 minutos de avanço por clique)
-            const timestampInicio = parseInt(localStorage.getItem('pedido_timestamp_inicio') || Date.now());
-             const novoTimestamp = timestampInicio - (2 * 60 * 1000); 
-             localStorage.setItem('pedido_timestamp_inicio', novoTimestamp.toString());
+            const timestampInicio = parseInt(OrderStorage.get(OrderStorage.baseKeys.timestamp, Date.now().toString()) || Date.now());
+             const novoTimestamp = timestampInicio - (2 * 60 * 1000);
+             OrderStorage.set(OrderStorage.baseKeys.timestamp, novoTimestamp.toString());
             
              simularStatusPedido();
           }

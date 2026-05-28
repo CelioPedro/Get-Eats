@@ -48,11 +48,8 @@ class DesktopOrderHistoryManager {
     }
 
     loadOrders() {
-        // Load current orders
-        this.currentOrders = JSON.parse(localStorage.getItem('pedidos_atuais') || '[]');
-
-        // Load past orders
-        this.pastOrders = JSON.parse(localStorage.getItem('historico_pedidos') || '[]');
+        this.currentOrders = OrderStorage.getCurrentOrders();
+        this.pastOrders = OrderStorage.getHistory();
 
         // Convert dates and sort
         this.currentOrders = this.currentOrders.map(order => ({
@@ -193,8 +190,7 @@ class DesktopOrderHistoryManager {
         }
 
         if (order) {
-            // Save as current order for tracking
-            localStorage.setItem('pedido_atual', JSON.stringify(order));
+            OrderStorage.setCurrentOrder(order);
 
             // Open tracking modal
             desktopOrderTrackingManager.openModal();
