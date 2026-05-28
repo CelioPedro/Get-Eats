@@ -5,20 +5,20 @@ class CarrinhoManager {
         this.carrinho = [];
         this.cupomAplicado = null;
         this.taxaEntrega = 5.00; // Taxa fixa de entrega
-        this.endereco = null; // EndereÃ§o de entrega
+        this.endereco = null; // Endereço de entrega
         this.carregarCarrinho();
     }
 
     // Adicionar item ao carrinho
     adicionarItem(item) {
-        // Verificar se o item jÃ¡ existe no carrinho
+        // Verificar se o item já existe no carrinho
         const itemExistente = this.carrinho.find(cartItem => cartItem.id === item.id);
 
         if (itemExistente) {
             // Se existe, aumentar quantidade
             itemExistente.quantidade += item.quantidade || 1;
         } else {
-            // Se nÃ£o existe, adicionar novo item
+            // Se não existe, adicionar novo item
             const novoItem = {
                 id: item.id,
                 nome: item.nome,
@@ -65,7 +65,7 @@ class CarrinhoManager {
     calcularDesconto() {
         if (!this.cupomAplicado) return 0;
 
-        // Cupons disponÃ­veis: cupom5 (R$5,00), cupom10 (R$10,00), cupom12 (R$12,00)
+        // Cupons disponíveis: cupom5 (R$5,00), cupom10 (R$10,00), cupom12 (R$12,00)
         const cupons = {
             'cupom5': 5.00,
             'cupom10': 10.00,
@@ -80,12 +80,12 @@ class CarrinhoManager {
         const subtotal = this.calcularSubtotal();
         const desconto = this.calcularDesconto();
         const total = subtotal + this.taxaEntrega - desconto;
-        return Math.max(total, 0); // NÃ£o permitir total negativo
+        return Math.max(total, 0); // Não permitir total negativo
     }
 
     // Aplicar cupom
     aplicarCupom(codigo) {
-        // Lista de cupons vÃ¡lidos (poderia vir de uma API)
+        // Lista de cupons válidos (poderia vir de uma API)
         const cuponsValidos = ['cupom5', 'cupom10', 'cupom12'];
 
         if (cuponsValidos.includes(codigo.toLowerCase())) {
@@ -107,13 +107,13 @@ class CarrinhoManager {
 
     // Salvar carrinho no localStorage
     salvarCarrinho() {
-        // Verificar se usuÃ¡rio estÃ¡ logado
+        // Verificar se usuário está logado
         const usuarioLogado = authManager.obterUsuarioLogado();
         let chaveCarrinho;
         if (usuarioLogado) {
             chaveCarrinho = `carrinho_geteats_${usuarioLogado.email}`;
         } else {
-            // Usar chave genÃ©rica para usuÃ¡rios nÃ£o logados
+            // Usar chave genérica para usuários não logados
             chaveCarrinho = 'carrinho_geteats';
         }
 
@@ -127,10 +127,10 @@ class CarrinhoManager {
 
     // Carregar carrinho do localStorage
     carregarCarrinho() {
-        // Verificar se usuÃ¡rio estÃ¡ logado
+        // Verificar se usuário está logado
         const usuarioLogado = authManager.obterUsuarioLogado();
         if (!usuarioLogado) {
-            // Se nÃ£o estiver logado, usar carrinho genÃ©rico (compatibilidade)
+            // Se não estiver logado, usar carrinho genérico (compatibilidade)
             const dadosSalvos = localStorage.getItem('carrinho_geteats');
             if (dadosSalvos) {
                 const dados = JSON.parse(dadosSalvos);
@@ -147,9 +147,9 @@ class CarrinhoManager {
             const dados = JSON.parse(dadosSalvos);
             this.carrinho = dados.itens || [];
             this.cupomAplicado = dados.cupom || null;
-            this.endereco = dados.endereco || usuarioLogado.endereco; // Usar endereÃ§o do perfil se nÃ£o houver no carrinho
+            this.endereco = dados.endereco || usuarioLogado.endereco; // Usar endereço do perfil se não houver no carrinho
         } else {
-            // Primeiro acesso: carregar endereÃ§o do perfil
+            // Primeiro acesso: carregar endereço do perfil
             this.endereco = usuarioLogado.endereco;
         }
     }
@@ -158,19 +158,19 @@ class CarrinhoManager {
     limparCarrinho() {
         this.carrinho = [];
         this.cupomAplicado = null;
-        // NÃ£o limpar endereÃ§o, manter o Ãºltimo usado
+        // Não limpar endereço, manter o último usado
         this.salvarCarrinho();
         this.atualizarInterface();
     }
 
-    // Alterar endereÃ§o de entrega
+    // Alterar endereço de entrega
     alterarEndereco(novoEndereco) {
         this.endereco = novoEndereco;
         this.salvarCarrinho();
         this.atualizarInterface();
     }
 
-    // Obter endereÃ§o atual
+    // Obter endereço atual
     obterEndereco() {
         return this.endereco;
     }
@@ -185,14 +185,14 @@ class CarrinhoManager {
         return this.obterQuantidadeTotal();
     }
 
-    // Verificar se carrinho estÃ¡ vazio
+    // Verificar se carrinho está vazio
     estaVazio() {
         return this.carrinho.length === 0;
     }
 
-    // Atualizar interface (serÃ¡ implementado nas pÃ¡ginas especÃ­ficas)
+    // Atualizar interface (será implementado nas páginas específicas)
     atualizarInterface() {
-        // Este mÃ©todo serÃ¡ sobrescrito nas pÃ¡ginas que usam o carrinho
+        // Este método será sobrescrito nas páginas que usam o carrinho
 
         // Disparar evento personalizado para atualizar outras partes da interface
         window.dispatchEvent(new CustomEvent('carrinhoAtualizado'));
@@ -212,10 +212,10 @@ class CarrinhoManager {
     }
 }
 
-// InstÃ¢ncia global do gerenciador do carrinho
+// Instância global do gerenciador do carrinho
 const carrinhoManager = new CarrinhoManager();
 
-// FunÃ§Ãµes de utilidade para integraÃ§Ã£o com pÃ¡ginas HTML
+// Funções de utilidade para integração com páginas HTML
 function adicionarAoCarrinho(item) {
     carrinhoManager.adicionarItem(item);
 }
@@ -240,7 +240,7 @@ function limparCarrinhoCompleto() {
     carrinhoManager.limparCarrinho();
 }
 
-// Exportar para uso em outros mÃ³dulos (se necessÃ¡rio)
+// Exportar para uso em outros módulos (se necessário)
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { CarrinhoManager, carrinhoManager };
 }

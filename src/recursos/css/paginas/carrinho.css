@@ -10,7 +10,7 @@
       background: #f9f9f9;
       min-height: 100vh;
       padding-bottom: 80px;
-      /* EspaÃ§o para footer fixo */
+      /* Espaço para footer fixo */
     }
 
     /* Header Superior Vermelho */
@@ -60,7 +60,7 @@
       z-index: 8;
     }
 
-    /* ConteÃºdo Principal */
+    /* Conteúdo Principal */
     .main-content {
         padding-top: 10rem;
       background-color: #f9f9f900;
@@ -285,7 +285,7 @@
       text-align: right;
     }
 
-    /* EndereÃ§o de Entrega */
+    /* Endereço de Entrega */
     .delivery-address {
       width: 100%;
       max-width: 350px;
@@ -323,9 +323,9 @@
       cursor: pointer;
     }
 
-    /* BotÃ£o Flutuante Carrinho - Removido pois Ã© a pÃ¡gina do carrinho */
+    /* Botão Flutuante Carrinho - Removido pois é a página do carrinho */
 
-    /* Footer NavegaÃ§Ã£o */
+    /* Footer Navegação */
     .footer-nav {
       position: fixed;
       bottom: 0;

@@ -19,7 +19,7 @@
     <img src="../assets/icons/PerfilHeader.svg" alt="Perfil" class="profile-icon" id="profile-icon">
   </div>
   <div class="search-bar">
-    <img src="../assets/icons/Busca.svg" alt="Buscar" class="search-icon"> <input type="text" placeholder="Buscar no cardÃ¡pio..." />
+    <img src="../assets/icons/Busca.svg" alt="Buscar" class="search-icon"> <input type="text" placeholder="Buscar no cardápio..." />
   </div>
   <div class="main-content">
     <div class="restaurant-details">
@@ -29,7 +29,7 @@
         <div class="rating">Adicione um novo produto</div>
       </div>
     </div>
-    <div class="categories"> <a href="#">Editar</a> <a href="#" class="active">Adicionar</a> <a href="#">PromoÃ§Ãµes</a><div class="categories-line"></div></div>
+    <div class="categories"> <a href="#">Editar</a> <a href="#" class="active">Adicionar</a> <a href="#">Promoções</a><div class="categories-line"></div></div>
     <div class="form-card">
 
       <label class="input-field__label" for="nomeprod">Nome do produto</label>
@@ -39,14 +39,14 @@
         </div>
       </div>
 
-      <label class="input-field__label" for="descricao">DescriÃ§Ã£o do produto</label>
+      <label class="input-field__label" for="descricao">Descrição do produto</label>
       <div class="input-field">
         <div class="input-field__input">
-          <textarea id="descricao" placeholder="DescriÃ§Ã£o do produto" rows="3"></textarea>
+          <textarea id="descricao" placeholder="Descrição do produto" rows="3"></textarea>
         </div>
       </div>
 
-      <label class="input-field__label" for="preco">PreÃ§o</label>
+      <label class="input-field__label" for="preco">Preço</label>
       <div class="input-field">
         <div class="input-field__input">
           <input type="number" id="preco" placeholder="R$ 0,00" step="0.01" />
@@ -58,7 +58,7 @@
         <div class="input-field__input">
           <select id="categoria">
             <option value="">Selecione uma categoria</option>
-            <option value="hamburgueres">HambÃºrgueres</option>
+            <option value="hamburgueres">Hambúrgueres</option>
             <option value="bebidas">Bebidas</option>
             <option value="acompanhamentos">Acompanhamentos</option>
           </select>
@@ -88,12 +88,12 @@
     </div>
 
   <div class="footer-nav"> <a href="./admin-cardapio.html" class="nav-item active" >
-      <img src="../assets/icons/HomeFooter.svg" alt="InÃ­cio" class="nav-icon" > InÃ­cio
+      <img src="../assets/icons/HomeFooter.svg" alt="Início" class="nav-icon" > Início
     </a>
      <a href="#" class="nav-item">
-      <img src="../assets/icons/Help.svg" alt="Pedidos" class="nav-icon"> AssistÃªncia
+      <img src="../assets/icons/Help.svg" alt="Pedidos" class="nav-icon"> Assistência
     <a href="./estatisticasADM.html" class="nav-item">
-      <img src="../assets/icons/Estátisticas.svg" alt="EstatÃ­sticas" class="nav-icon"> EstatÃ­sticas
+      <img src="../assets/icons/Est?tisticas.svg" alt="Estatísticas" class="nav-icon"> Estatísticas
     </a>
     <a href="perfilADM.html" class="nav-item">
       <img src="../assets/icons/PerfilFooter.svg" alt="Perfil" class="nav-icon"> Perfil
@@ -109,7 +109,7 @@
         });
       }
 
-      // Event listener para Ã­cone de perfil
+      // Event listener para ícone de perfil
       const profileIcon = document.getElementById('profile-icon');
       if (profileIcon) {
         profileIcon.addEventListener('click', function() {
@@ -136,7 +136,7 @@
             window.location.href = 'admin-cardapio.html';
           } else if (text === 'Adicionar') {
             // Already on add page, do nothing
-          } else if (text === 'PromoÃ§Ãµes') {
+          } else if (text === 'Promoções') {
             window.location.href = 'admin-cardapio.html?filter=promocoes';
           }
         });
@@ -150,8 +150,8 @@
         });
       }
 
-      // Event listener for AssistÃªncia button
-      const assistenciaLink = Array.from(document.querySelectorAll('.footer-nav a')).find(a => a.textContent.trim().includes('AssistÃªncia'));
+      // Event listener for Assistência button
+      const assistenciaLink = Array.from(document.querySelectorAll('.footer-nav a')).find(a => a.textContent.trim().includes('Assistência'));
       if (assistenciaLink) {
         assistenciaLink.addEventListener('click', function(e) {
           e.preventDefault();
@@ -173,14 +173,14 @@
           const imagemInput = document.getElementById('imagem');
           const imagem = imagemInput.files[0];
 
-          // ValidaÃ§Ã£o
+          // Validação
           if (!nome || !descricao || isNaN(preco) || !categoria || isNaN(tempo)) {
-            alert('Por favor, preencha todos os campos obrigatÃ³rios.');
+            alert('Por favor, preencha todos os campos obrigatórios.');
             return;
           }
 
           if (preco <= 0) {
-            alert('O preÃ§o deve ser maior que zero.');
+            alert('O preço deve ser maior que zero.');
             return;
           }
 
@@ -204,7 +204,7 @@
 
           function salvarProduto() {
             const produto = {
-              id: Date.now(), // ID Ãºnico baseado no timestamp
+              id: Date.now(), // ID único baseado no timestamp
               nome: nome,
               descricao: descricao,
               preco: preco,
@@ -212,7 +212,7 @@
               tempo: tempo,
               imagem: imagemUrl,
               rating: 0,
-              estrelas: 'â˜…â˜…â˜…â˜…â˜†'
+              estrelas: '★★★★☆'
             };
 
             // Salvar no localStorage
@@ -224,7 +224,7 @@
             window.dispatchEvent(new CustomEvent('produtoAdicionado', { detail: produto }));
 
             alert('Produto adicionado com sucesso!');
-            // Limpar formulÃ¡rio
+            // Limpar formulário
             document.getElementById('nomeprod').value = '';
             document.getElementById('descricao').value = '';
             document.getElementById('preco').value = '';
