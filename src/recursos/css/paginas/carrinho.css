@@ -62,7 +62,7 @@
 
     /* Conteúdo Principal */
     .main-content {
-        padding-top: 10rem;
+      padding-top: 10rem;
       background-color: #f9f9f900;
       width: 90vw;
       max-width: 400px;
@@ -79,10 +79,10 @@
     .coupon-bar {
       position: fixed;
       left: 50%;
-      top: 13%;
+      top: 6.5rem;
       transform: translateX(-50%);
       max-width: 600px;
-      width: 70vw;
+      width: min(70vw, 350px);
       height: 50px;
       display: flex;
       align-items: center;
@@ -432,6 +432,7 @@
       .coupon-bar {
         top: 7rem;
         max-width: 500px;
+        width: min(65vw, 500px);
       }
 
       .main-content {
