@@ -2,8 +2,6 @@
   <img src="docs/img/geteats-readme-logo.png" alt="Get Eats" width="96" />
 </p>
 
-<h1 align="center">Get Eats</h1>
-
 <hr />
 
 <h3 align="center">Delivery web responsivo com cardapio digital, carrinho, pagamento simulado e painel administrativo</h3>
