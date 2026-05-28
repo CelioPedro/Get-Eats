@@ -1,14 +1,14 @@
-﻿// JavaScript para a pÃ¡gina de produto
+﻿// JavaScript para a p?gina de produto
 
 document.addEventListener('DOMContentLoaded', function() {
     const ingredientButtons = document.querySelectorAll('.ingredient-btn');
 
     ingredientButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Remove a classe 'selected' de todos os botÃµes
+            // Remove a classe 'selected' de todos os bot?es
             ingredientButtons.forEach(btn => btn.classList.remove('selected'));
 
-            // Adiciona a classe 'selected' ao botÃ£o clicado
+            // Adiciona a classe 'selected' ao bot?o clicado
             this.classList.add('selected');
         });
     });
@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sauceButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Remove a classe 'selected' de todos os botÃµes de molho
+            // Remove a classe 'selected' de todos os bot?es de molho
             sauceButtons.forEach(btn => btn.classList.remove('selected'));
 
-            // Adiciona a classe 'selected' ao botÃ£o clicado
+            // Adiciona a classe 'selected' ao bot?o clicado
             this.classList.add('selected');
         });
     });
@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     drinkButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Remove a classe 'selected' de todos os botÃµes de bebida
+            // Remove a classe 'selected' de todos os bot?es de bebida
             drinkButtons.forEach(btn => btn.classList.remove('selected'));
 
-            // Adiciona a classe 'selected' ao botÃ£o clicado
+            // Adiciona a classe 'selected' ao bot?o clicado
             this.classList.add('selected');
         });
     });
@@ -41,15 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     accompanimentButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Remove a classe 'selected' de todos os botÃµes de acompanhamento
+            // Remove a classe 'selected' de todos os bot?es de acompanhamento
             accompanimentButtons.forEach(btn => btn.classList.remove('selected'));
 
-            // Adiciona a classe 'selected' ao botÃ£o clicado
+            // Adiciona a classe 'selected' ao bot?o clicado
             this.classList.add('selected');
         });
     });
 
-    // Funcionalidade do botÃ£o "Adicionar ao Carrinho"
+    // Funcionalidade do bot?o "Adicionar ao Carrinho"
     const addToCartBtn = document.querySelector('.add-to-cart-btn');
     if (addToCartBtn) {
         addToCartBtn.addEventListener('click', function() {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Carregar carrinho.js se nÃ£o estiver carregado
+    // Carregar carrinho.js se n?o estiver carregado
     if (typeof carrinhoManager === 'undefined') {
         const script = document.createElement('script');
         script.src = '../recursos/js/carrinho.js';
@@ -67,22 +67,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// FunÃ§Ã£o para coletar informaÃ§Ãµes do produto e adicionar ao carrinho
+// Fun??o para coletar informa??es do produto e adicionar ao carrinho
 function adicionarProdutoAoCarrinho() {
-    // Coletar informaÃ§Ãµes bÃ¡sicas do produto
+    // Coletar informa??es b?sicas do produto
     const productTitle = document.querySelector('.product-title');
     const productPrice = document.querySelector('.price');
     const productImage = document.querySelector('.product-image');
 
 
     if (!productTitle || !productPrice) {
-        console.error('InformaÃ§Ãµes do produto nÃ£o encontradas');
+        console.error('Informa??es do produto n?o encontradas');
         console.error('productTitle:', productTitle);
         console.error('productPrice:', productPrice);
         return;
     }
 
-    // Extrair nome e preÃ§o
+    // Extrair nome e pre?o
     const nome = productTitle.textContent.trim();
     // Improved price parsing with regex
     const precoMatch = productPrice.textContent.trim().match(/R\$\s*([\d,]+)/);
@@ -96,17 +96,17 @@ function adicionarProdutoAoCarrinho() {
     const preco = parseFloat(precoTexto);
 
 
-    // ValidaÃ§Ã£o do preÃ§o
+    // Valida??o do pre?o
     if (isNaN(preco) || preco <= 0) {
-        console.error('PreÃ§o invÃ¡lido:', preco);
-        alert('Erro: PreÃ§o do produto invÃ¡lido. NÃ£o foi possÃ­vel adicionar ao carrinho.');
+        console.error('Pre?o inv?lido:', preco);
+        alert('Erro: Pre?o do produto inv?lido. N?o foi poss?vel adicionar ao carrinho.');
         return;
     }
 
-    // Gerar ID Ãºnico baseado no nome (simplificado)
+    // Gerar ID ?nico baseado no nome (simplificado)
     const id = nome.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '');
 
-    // Coletar customizaÃ§Ãµes selecionadas
+    // Coletar customiza??es selecionadas
     const customizacoes = {
         ingredientes: [],
         molhos: [],
@@ -165,19 +165,19 @@ function adicionarProdutoAoCarrinho() {
     if (typeof adicionarAoCarrinho === 'function') {
         adicionarAoCarrinho(itemCarrinho);
 
-        // Feedback visual para o usuÃ¡rio
+        // Feedback visual para o usu?rio
         mostrarFeedbackAdicao();
     } else {
-        console.error('FunÃ§Ã£o adicionarAoCarrinho nÃ£o encontrada. Verifique se carrinho.js foi carregado.');
+        console.error('Fun??o adicionarAoCarrinho n?o encontrada. Verifique se carrinho.js foi carregado.');
     }
 }
 
-// FunÃ§Ã£o para mostrar feedback visual da adiÃ§Ã£o
+// Fun??o para mostrar feedback visual da adi??o
 function mostrarFeedbackAdicao() {
     const btn = document.querySelector('.add-to-cart-btn');
     if (btn) {
         const textoOriginal = btn.textContent;
-        btn.textContent = 'âœ“ Adicionado!';
+        btn.textContent = '? Adicionado!';
         btn.style.background = '#28a745';
 
         setTimeout(() => {

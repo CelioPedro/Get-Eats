@@ -23,7 +23,7 @@
   </div>
   <div class="main-content">
     <div class="cart-items">
-      <!-- Itens serÃ£o renderizados dinamicamente pelo JavaScript -->
+      <!-- Itens ser?o renderizados dinamicamente pelo JavaScript -->
     </div>
 
     <!-- Card de Resumo do Pedido -->
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <!-- EndereÃ§o de Entrega -->
+    <!-- Endere?o de Entrega -->
     <div class="delivery-address">
       <div class="address-info">
         <img src="../assets/icons/Loc.svg" alt="Location" class="loc-icon">
@@ -86,8 +86,8 @@
         if (itens.length === 0) {
           cartItemsContainer.innerHTML = `
             <div style="text-align: center; padding: 2rem; color: #666;">
-              <p>Seu carrinho estÃ¡ vazio</p>
-              <p><a href="cardapio.html" style="color: #FE2E2E; text-decoration: none;">Voltar ao cardÃ¡pio</a></p>
+              <p>Seu carrinho est? vazio</p>
+              <p><a href="cardapio.html" style="color: #FE2E2E; text-decoration: none;">Voltar ao card?pio</a></p>
             </div>
           `;
           return;
@@ -116,7 +116,7 @@
           <div class="details">
             <div class="title">${item.nome}</div>
             <div class="price">R$ ${(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</div>
-            <div class="delivery-time">PrevisÃ£o: 30-45 min</div>
+            <div class="delivery-time">Previs?o: 30-45 min</div>
           </div>
           <div class="delete-icon" data-id="${item.id}">
             <img src="../assets/icons/Delete.svg" alt="Delete">
@@ -127,7 +127,7 @@
       }
 
       configurarEventos() {
-        // Eventos para botÃµes de quantidade
+        // Eventos para bot?es de quantidade
         document.addEventListener('click', (e) => {
           if (e.target.classList.contains('qty-btn')) {
             const action = e.target.dataset.action;
@@ -144,7 +144,7 @@
           }
         });
 
-        // Eventos para botÃµes de deletar
+        // Eventos para bot?es de deletar
         document.addEventListener('click', (e) => {
           if (e.target.closest('.delete-icon')) {
             const id = e.target.closest('.delete-icon').dataset.id;
@@ -168,7 +168,7 @@
                 couponInput.value = '';
                 this.atualizarResumo();
               } else {
-                alert('Cupom invÃ¡lido ou expirado.');
+                alert('Cupom inv?lido ou expirado.');
               }
             }
           });
@@ -182,15 +182,15 @@
           });
         }
 
-        // Evento para alterar endereÃ§o
+        // Evento para alterar endere?o
         const alterarEnderecoBtn = document.querySelector('#alterar-endereco-btn');
         if (alterarEnderecoBtn) {
           alterarEnderecoBtn.addEventListener('click', () => {
-            const novoEndereco = prompt('Digite o novo endereÃ§o de entrega:');
+            const novoEndereco = prompt('Digite o novo endere?o de entrega:');
             if (novoEndereco && novoEndereco.trim()) {
               this.carrinhoManager.alterarEndereco(novoEndereco.trim());
               this.atualizarEndereco();
-              alert('EndereÃ§o atualizado com sucesso!');
+              alert('Endere?o atualizado com sucesso!');
             }
           });
         }
@@ -200,20 +200,20 @@
         if (finalizeBtn) {
           finalizeBtn.addEventListener('click', function() {
             if (this.carrinhoManager.estaVazio()) {
-              alert('Seu carrinho estÃ¡ vazio. Adicione itens antes de finalizar.');
+              alert('Seu carrinho est? vazio. Adicione itens antes de finalizar.');
               return;
             }
 
-            // Verificar se usuÃ¡rio estÃ¡ logado
+            // Verificar se usu?rio est? logado
             if (!authManager.estaLogado()) {
-              alert('VocÃª precisa fazer login para finalizar o pedido.');
+              alert('Voc? precisa fazer login para finalizar o pedido.');
               window.location.href = 'login.html';
               return;
             }
 
-            // Verificar se endereÃ§o foi definido
+            // Verificar se endere?o foi definido
             if (!this.carrinhoManager.obterEndereco()) {
-              alert('Por favor, defina um endereÃ§o de entrega antes de finalizar o pedido.');
+              alert('Por favor, defina um endere?o de entrega antes de finalizar o pedido.');
               return;
             }
 
@@ -263,12 +263,12 @@
         const enderecoElement = document.querySelector('#endereco-entrega');
         if (enderecoElement) {
           const endereco = this.carrinhoManager.obterEndereco();
-          enderecoElement.textContent = endereco || 'EndereÃ§o nÃ£o definido';
+          enderecoElement.textContent = endereco || 'Endere?o n?o definido';
         }
       }
     }
 
-    // Inicializar interface do carrinho quando a pÃ¡gina carregar
+    // Inicializar interface do carrinho quando a p?gina carregar
     document.addEventListener('DOMContentLoaded', function() {
       new CarrinhoInterface();
     });
