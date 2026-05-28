@@ -1,4 +1,3 @@
-
 // API para gerenciamento de produtos usando localStorage
 class ProdutoAPI {
   constructor() {
@@ -20,7 +19,7 @@ class ProdutoAPI {
           promocao: true,
           rating: 4.8,
           estrelas: "★★★★★",
-          categoria: "favoritos,entrega-gratis,promocoes,hamburgueres",
+          categoria: "entrega-gratis,promocoes,hamburgueres",
           preco: 32.50
         },
         {
@@ -31,7 +30,7 @@ class ProdutoAPI {
           imagem: "../assets/imagen/ChickenBurguer.jpg",
           promocao: false,
           rating: 4.6,
-          categoria: "favoritos,entrega-gratis,hamburgueres",
+          categoria: "entrega-gratis,hamburgueres",
           preco: 28.00
         },
         {
@@ -42,7 +41,7 @@ class ProdutoAPI {
           imagem: "../assets/imagen/Australiano.jpg",
           promocao: false,
           rating: 4.9,
-          categoria: "favoritos,entrega-gratis,hamburgueres",
+          categoria: "entrega-gratis,hamburgueres",
           preco: 35.00
         },
         {
@@ -88,7 +87,7 @@ class ProdutoAPI {
           imagem: "../assets/imagen/CheddarDuplo.jpg",
           promocao: false,
           rating: 4.9,
-          categoria: "favoritos,hamburgueres",
+          categoria: "hamburgueres",
           preco: 34.00
         },
         {
@@ -100,7 +99,7 @@ class ProdutoAPI {
           promocao: false,
           rating: 4.9,
           estrelas: "★★★★★",
-          categoria: "favoritos,hamburgueres",
+          categoria: "hamburgueres",
           preco: 38.00
         },
         {
@@ -145,7 +144,7 @@ class ProdutoAPI {
           promocao: false,
           rating: 4.5,
           estrelas: "★★★★☆",
-          categoria: "bebidas,favoritos",
+          categoria: "bebidas",
           preco: 6.00
         },
         {
@@ -156,7 +155,7 @@ class ProdutoAPI {
           imagem: "../assets/imagen/SucoMelancia.jpg",
           promocao: false,
           rating: 4.5,
-          categoria: "bebidas,favoritos",
+          categoria: "bebidas",
           preco: 6.00
         }
       ];
@@ -167,7 +166,7 @@ class ProdutoAPI {
   // Salvar produto
   salvarProduto(produto) {
     const produtos = this.obterProdutos();
-    produto.id = Date.now(); // ensure unique id
+    produto.id = Date.now();
     produtos.push(produto);
     localStorage.setItem(this.storageKey, JSON.stringify(produtos));
   }

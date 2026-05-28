@@ -1,6 +1,86 @@
-﻿// JavaScript para a p?gina de produto
+// JavaScript para a página de produto
+
+const FAVORITES_STORAGE_KEY = 'getEatsFavoritos';
+
+function normalizarProdutoId(valor) {
+    return valor
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '')
+        .replace(/[^a-z0-9]/g, '');
+}
+
+function obterProdutoAtualId() {
+    const titulo = document.querySelector('.product-title');
+    if (titulo && titulo.textContent.trim()) {
+        return normalizarProdutoId(titulo.textContent.trim());
+    }
+
+    return normalizarProdutoId(window.location.pathname.split('/').pop().replace('.html', ''));
+}
+
+function obterFavoritos() {
+    try {
+        return JSON.parse(localStorage.getItem(FAVORITES_STORAGE_KEY) || '[]');
+    } catch (error) {
+        return [];
+    }
+}
+
+function salvarFavoritos(favoritos) {
+    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify([...new Set(favoritos)]));
+}
+
+function produtoEstaFavorito(produtoId) {
+    return obterFavoritos().includes(produtoId);
+}
+
+function alternarFavorito(produtoId) {
+    const favoritos = obterFavoritos();
+    const estaFavorito = favoritos.includes(produtoId);
+    const novosFavoritos = estaFavorito
+        ? favoritos.filter(id => id !== produtoId)
+        : [...favoritos, produtoId];
+
+    salvarFavoritos(novosFavoritos);
+    return !estaFavorito;
+}
+
+function atualizarBotaoFavorito(botao, estaFavorito) {
+    botao.classList.toggle('is-favorite', estaFavorito);
+    botao.setAttribute('aria-pressed', String(estaFavorito));
+    botao.setAttribute('aria-label', estaFavorito ? 'Remover dos favoritos' : 'Adicionar aos favoritos');
+    botao.textContent = estaFavorito ? '♥' : '♡';
+}
+
+function inicializarFavoritoProduto() {
+    const botaoFavorito = document.querySelector('.floating-icon');
+    if (!botaoFavorito) return;
+
+    const produtoId = obterProdutoAtualId();
+    botaoFavorito.classList.add('favorite-toggle');
+    botaoFavorito.setAttribute('role', 'button');
+    botaoFavorito.setAttribute('tabindex', '0');
+    atualizarBotaoFavorito(botaoFavorito, produtoEstaFavorito(produtoId));
+
+    function handleToggle(event) {
+        event.preventDefault();
+        const estaFavorito = alternarFavorito(produtoId);
+        atualizarBotaoFavorito(botaoFavorito, estaFavorito);
+    }
+
+    botaoFavorito.addEventListener('click', handleToggle);
+    botaoFavorito.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            handleToggle(event);
+        }
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
+    inicializarFavoritoProduto();
+
     const ingredientButtons = document.querySelectorAll('.ingredient-btn');
 
     ingredientButtons.forEach(button => {

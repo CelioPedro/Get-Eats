@@ -81,7 +81,7 @@
         </div>
         <div class="product-grid">
             <a href="xbacon.html" style="text-decoration: none; color: inherit;"
-                data-categoria="favoritos,entrega-gratis,promocoes,hamburgueres" data-preco="32.50" data-avaliacao="4.8"
+                data-categoria="entrega-gratis,promocoes,hamburgueres" data-preco="32.50" data-avaliacao="4.8"
                 data-tempo-entrega="20">
                 <div class="product-card">
                     <div class="discount-badge">
@@ -99,7 +99,7 @@
                 </div>
             </a>
             <a href="chickenburguer.html" style="text-decoration: none; color: inherit;"
-                data-categoria="favoritos,entrega-gratis,hamburgueres" data-preco="28.00" data-avaliacao="4.6"
+                data-categoria="entrega-gratis,hamburgueres" data-preco="28.00" data-avaliacao="4.6"
                 data-tempo-entrega="18">
                 <div class="product-card">
                     <div class="image" style="background-image: url('../assets/imagen/ChickenBurguer.jpg');"></div>
@@ -114,7 +114,7 @@
             </a>
 
             <a href="australiano.html" style="text-decoration: none; color: inherit;"
-                data-categoria="favoritos,entrega-gratis,hamburgueres" data-preco="35.00" data-avaliacao="4.9"
+                data-categoria="entrega-gratis,hamburgueres" data-preco="35.00" data-avaliacao="4.9"
                 data-tempo-entrega="22">
                 <div class="product-card">
                     <div class="image" style="background-image: url('../assets/imagen/Australiano.jpg');"></div>
@@ -167,7 +167,7 @@
                 </div>
             </a>
             <a href="cheddarduplo.html" style="text-decoration: none; color: inherit;"
-                data-categoria="favoritos,hamburgueres" data-preco="34.00" data-avaliacao="4.9" data-tempo-entrega="24">
+                data-categoria="hamburgueres" data-preco="34.00" data-avaliacao="4.9" data-tempo-entrega="24">
                 <div class="product-card">
                     <div class="image" style="background-image: url('../assets/imagen/CheddarDuplo.jpg');"></div>
                     <div class="details">
@@ -180,7 +180,7 @@
                 </div>
             </a>
             <a href="artesanalduplo.html" style="text-decoration: none; color: inherit;"
-                data-categoria="favoritos,hamburgueres" data-preco="38.00" data-avaliacao="4.9" data-tempo-entrega="25">
+                data-categoria="hamburgueres" data-preco="38.00" data-avaliacao="4.9" data-tempo-entrega="25">
                 <div class="product-card">
                     <div class="image" style="background-image: url('../assets/imagen/ArtesanalDuplo.jpg');"></div>
                     <div class="details">
@@ -231,7 +231,7 @@
                     <div class="add-btn">+</div>
                 </div>
             </a>
-            <a href="sucolaranja.html" style="text-decoration: none; color: inherit;" data-categoria="bebidas,favoritos"
+            <a href="sucolaranja.html" style="text-decoration: none; color: inherit;" data-categoria="bebidas"
                 data-preco="6.00" data-avaliacao="4.5" data-tempo-entrega="5">
                 <div class="product-card">
                     <div class="image" style="background-image: url('../assets/imagen/SucoLaranja.jpg');"></div>
@@ -245,7 +245,7 @@
                 </div>
             </a>
             <a href="sucomelancia.html" style="text-decoration: none; color: inherit;"
-                data-categoria="bebidas,favoritos" data-preco="6.00" data-avaliacao="4.5" data-tempo-entrega="5">
+                data-categoria="bebidas" data-preco="6.00" data-avaliacao="4.5" data-tempo-entrega="5">
                 <div class="product-card">
                     <div class="image" style="background-image: url('../assets/imagen/SucoMelancia.jpg');"></div>
                     <div class="details">
@@ -969,6 +969,43 @@
             return stars;
         }
 
+        const FAVORITES_STORAGE_KEY = 'getEatsFavoritos';
+
+        function normalizarProdutoId(valor) {
+            return valor
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/\s+/g, '')
+                .replace(/[^a-z0-9]/g, '');
+        }
+
+        function obterFavoritos() {
+            try {
+                return JSON.parse(localStorage.getItem(FAVORITES_STORAGE_KEY) || '[]');
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function produtoEstaFavorito(produtoId) {
+            return obterFavoritos().includes(produtoId);
+        }
+
+        function obterCategoriasVisiveis(produto) {
+            const produtoId = normalizarProdutoId(produto.nome);
+            const categorias = (produto.categoria || '')
+                .split(',')
+                .map(categoria => categoria.trim())
+                .filter(categoria => categoria && categoria !== 'favoritos');
+
+            if (produtoEstaFavorito(produtoId)) {
+                categorias.push('favoritos');
+            }
+
+            return categorias;
+        }
+
         // Função para inicializar produtos no localStorage se não existirem
         function inicializarProdutosPadrao() {
             if (window.produtoAPI) return;
@@ -981,7 +1018,7 @@
                         nome: 'X Bacon',
                         descricao: 'Hambúrguer com bacon • 20 min',
                         preco: 32.50,
-                        categoria: 'hamburgueres,favoritos,entrega-gratis,promocoes',
+                        categoria: 'hamburgueres,entrega-gratis,promocoes',
                         tempo: 20,
                         imagem: '../assets/imagen/XBacon.jpg',
                         rating: 4.8,
@@ -992,7 +1029,7 @@
                         nome: 'Chicken Burguer',
                         descricao: 'Hambúrguer de frango • 18 min',
                         preco: 28.00,
-                        categoria: 'hamburgueres,favoritos,entrega-gratis',
+                        categoria: 'hamburgueres,entrega-gratis',
                         tempo: 18,
                         imagem: '../assets/imagen/ChickenBurguer.jpg',
                         rating: 4.6,
@@ -1003,7 +1040,7 @@
                         nome: 'Australiano',
                         descricao: 'Hambúrguer australiano • 22 min',
                         preco: 35.00,
-                        categoria: 'hamburgueres,favoritos,entrega-gratis',
+                        categoria: 'hamburgueres,entrega-gratis',
                         tempo: 22,
                         imagem: '../assets/imagen/Australiano.jpg',
                         rating: 4.9,
@@ -1047,7 +1084,7 @@
                         nome: 'Cheddar Duplo',
                         descricao: 'Hambúrguer 2x com cheddar • 24 min',
                         preco: 34.00,
-                        categoria: 'hamburgueres,favoritos',
+                        categoria: 'hamburgueres',
                         tempo: 24,
                         imagem: '../assets/imagen/CheddarDuplo.jpg',
                         rating: 4.9,
@@ -1058,7 +1095,7 @@
                         nome: 'Artesanal Duplo',
                         descricao: 'Hambúrguer artesanal duplo • 25 min',
                         preco: 38.00,
-                        categoria: 'hamburgueres,favoritos',
+                        categoria: 'hamburgueres',
                         tempo: 25,
                         imagem: '../assets/imagen/ArtesanalDuplo.jpg',
                         rating: 4.9,
@@ -1102,7 +1139,7 @@
                         nome: 'Suco de Laranja',
                         descricao: 'Suco natural • 5 min',
                         preco: 6.00,
-                        categoria: 'bebidas,favoritos',
+                        categoria: 'bebidas',
                         tempo: 5,
                         imagem: '../assets/imagen/SucoLaranja.jpg',
                         rating: 4.5,
@@ -1113,7 +1150,7 @@
                         nome: 'Suco de Melancia',
                         descricao: 'Suco natural • 5 min',
                         preco: 6.00,
-                        categoria: 'bebidas,favoritos',
+                        categoria: 'bebidas',
                         tempo: 5,
                         imagem: '../assets/imagen/SucoMelancia.jpg',
                         rating: 4.5,
@@ -1135,13 +1172,16 @@
             productGrid.innerHTML = '';
 
             produtos.forEach(produto => {
+                const produtoId = normalizarProdutoId(produto.nome);
+                const categoriasVisiveis = obterCategoriasVisiveis(produto);
                 const productLink = document.createElement('a');
                 // Set the href to the product page based on the product name
                 const productPageName = produto.nome.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '') + '.html';
                 productLink.href = productPageName;
                 productLink.style.textDecoration = 'none';
                 productLink.style.color = 'inherit';
-                productLink.setAttribute('data-categoria', produto.categoria);
+                productLink.setAttribute('data-produto-id', produtoId);
+                productLink.setAttribute('data-categoria', categoriasVisiveis.join(','));
                 productLink.setAttribute('data-preco', produto.preco.toString());
                 productLink.setAttribute('data-avaliacao', produto.rating.toString());
                 productLink.setAttribute('data-tempo-entrega', produto.tempo.toString());
@@ -1489,8 +1529,11 @@
             function filterProducts(category) {
                 const productLinks = document.querySelectorAll('.product-grid a');
                 productLinks.forEach(link => {
+                    const produtoId = link.getAttribute('data-produto-id');
                     const categorias = link.getAttribute('data-categoria').split(',');
-                    if (categorias.includes(category)) {
+                    const isFavoriteFilter = category === 'favoritos';
+                    const showFavorite = isFavoriteFilter && produtoId && produtoEstaFavorito(produtoId);
+                    if (showFavorite || (!isFavoriteFilter && categorias.includes(category))) {
                         link.style.display = '';
                     } else {
                         link.style.display = 'none';
