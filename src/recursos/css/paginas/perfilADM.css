@@ -1,3 +1,9 @@
+@media (min-width: 768px) {
+  body {
+    display: none;
+  }
+}
+
 /* Header Styles for Perfil ADM Page */
 .profile-icon {
   position: absolute;
