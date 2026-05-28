@@ -1,0 +1,21 @@
+# Dependencies and package managers
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Local environment
+.env
+.env.*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Temporary files
+tmp_*
+*.log
+
+# Generated documents
+*.docx

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Get Eats e uma aplicacao web de delivery com cardapio, carrinho, pagamento simulado e painel administrativo." />
+    <link rel="icon" type="image/png" href="../assets/logos/GetEatsPNG.png" />
+<title>Login</title>
+<link rel="stylesheet" href="../recursos/css/principal.css">
+</head>
+<body>
+  <div class="form-card">
+    <div class="form-card__header">
+      <div class="form-card__header-bg"></div>
+      <img src="../assets/logos/GetEatsSVG.svg" alt="Get Eats Logo" class="logo logo--pequeno" />
+    </div>
+
+    <div class="form-card__notch"></div>
+    <div class="form-card__title">Entre na sua conta</div>
+
+    <label class="input-field__label" for="email">Email</label>
+    <div class="input-field">
+      <div class="input-field__input">
+        <div class="input-field__icon"></div>
+        <input type="email" id="email" placeholder="seu@email.com" />
+      </div>
+    </div>
+
+    <label class="input-field__label" for="password">Senha</label>
+    <div class="input-field">
+      <div class="input-field__input">
+        <div class="input-field__icon"></div>
+        <input type="password" id="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
+        <img class="input-field__eye" src="../assets/icons/NãoVer.svg" alt="Mostrar senha" />
+      </div>
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" class="checkbox-group__input" id="remember" />
+      <label class="checkbox-group__label" for="remember">Lembrar de mim</label>
+    </div>
+
+    <button class="btn btn--primario">Entrar</button>
+
+    <div class="form-card__forgot-password">Esqueceu a senha?</div>
+
+    <div class="form-card__separator">ou</div>
+
+    <button class="social-btn" onclick="alert('Funcionalidade em desenvolvimento');">
+      <div class="social-btn__icon"><img src="../assets/icons/Google.svg" alt="Google" /></div>
+      Continuar com Google
+    </button>
+
+    <button class="social-btn" onclick="alert('Funcionalidade em desenvolvimento');">
+      <div class="social-btn__icon"><img src="../assets/icons/Apple.svg" alt="Apple" /></div>
+      Continuar com Apple
+    </button>
+
+    <div class="form-card__bottom-text">NÃ£o tem uma conta? <a href="cadastro.html">Criar conta</a></div>
+  </div>
+<script src="../recursos/js/auth.js"></script>
+<script src="../recursos/js/login.js"></script>
+</body>
+</html>

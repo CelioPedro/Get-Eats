@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Get Eats e uma aplicacao web de delivery com cardapio, carrinho, pagamento simulado e painel administrativo." />
+    <link rel="icon" type="image/png" href="../assets/logos/GetEatsPNG.png" />
+  <title>CardÃ¡pioADM - Get Eats</title>
+  <link rel="stylesheet" href="../recursos/css/principal.css">
+  <link rel="stylesheet" href="../recursos/css/paginas/cardapioADM.css">
+</head>
+
+<style>
+  
+  @media (min-width: 768px){
+    body{
+      display: none;
+    }
+  }
+  .categories {
+    align-items: center !important;
+  }
+
+  .categories a{
+    padding-left: 2rem !important;
+  }
+
+  .product-card .discount-badge {
+    max-width: 6rem;
+            bottom: 0.75rem;
+            left: 8.5rem;
+  }
+
+</style>
+
+<body>
+  <div class="header">
+    <div class="header-bg"></div>
+    <img src="../assets/icons/Voltar.svg" alt="Voltar" class="back-icon">
+    <img src="../assets/logos/GetEatsSVG.svg" alt="Get Eats Logo" class="logo logo--pequeno" />
+  <img src="../assets/icons/PerfilHeader.svg" alt="Perfil" class="profile-icon" id="profile-icon">
+  </div>
+  <div class="search-bar">
+    <img src="../assets/icons/Busca.svg" alt="Buscar" class="search-icon"> <input type="text" placeholder="Buscar no cardÃ¡pio..." />
+    
+  </div>
+  <div class="main-content">
+    <div class="restaurant-details">
+    <div class="logo-small"></div>
+    <div class="info">
+      <div class="name">Burguer House</div>
+      <div class="rating">Gerencie seu cardÃ¡pio </div>
+    </div>
+  </div>
+    <div class="categories"> <a href="#" class="active">Editar</a> <a href="#">Adicionar</a> <a href="#">PromoÃ§Ãµes</a><div class="categories-line"></div></div>
+    <div class="products" id="products-container">
+      <!-- Produtos serÃ£o carregados dinamicamente aqui -->
+    </div>
+  </div>
+  
+  <div class="footer-nav"> <a href="#" class="nav-item active">
+      <img src="../assets/icons/HomeFooter.svg" alt="InÃ­cio" class="nav-icon"> InÃ­cio
+    </a> <a href="#" class="nav-item">
+      <img src="../assets/icons/Help.svg" alt="Pedidos" class="nav-icon"> AssistÃªncia
+    <a href="estatisticasADM.html" class="nav-item">
+      <img src="../assets/icons/Estátisticas.svg" alt="EstatÃ­sticas" class="nav-icon"> EstatÃ­sticas
+    </a>
+    <a href="perfilADM.html" class="nav-item">
+      <img src="../assets/icons/PerfilFooter.svg" alt="Perfil" class="nav-icon"> Perfil
+  </div>
+
+
+
+  <script src="../recursos/js/api.js"></script>
+  <script src="../recursos/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const backIcon = document.querySelector('.back-icon');
+      if (backIcon) {
+        backIcon.addEventListener('click', function() {
+          window.history.back();
+        });
+      }
+
+      // Event listener para Ã­cone de perfil
+      const profileIcon = document.getElementById('profile-icon');
+      if (profileIcon) {
+        profileIcon.addEventListener('click', function() {
+          window.location.href = 'perfilADM.html';
+        });
+      }
+
+      // Carregar produtos dinamicamente
+      adminManager.carregarProdutosAdmin();
+
+      // Funcionalidade de busca
+      const searchInput = document.querySelector('.search-bar input');
+
+      searchInput.addEventListener('input', function () {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        adminManager.filtrarProdutos(searchTerm);
+      });
+
+      // Funcionalidade das categorias
+      const categoryLinks = document.querySelectorAll('.categories a');
+
+      function showAllProducts() {
+        adminManager.filtrarProdutos('');
+      }
+
+      function showPromotionProducts() {
+        adminManager.filtrarProdutos('', 'promocao');
+      }
+
+      // Check URL parameters for initial filter
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('filter') === 'promocoes') {
+        // Set PromoÃ§Ãµes as active and filter products
+        categoryLinks.forEach(l => l.classList.remove('active'));
+        const promocoesLink = Array.from(categoryLinks).find(link => link.textContent.trim() === 'PromoÃ§Ãµes');
+        if (promocoesLink) {
+          promocoesLink.classList.add('active');
+          showPromotionProducts();
+        }
+      }
+
+      categoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          // Remove active class from all links
+          categoryLinks.forEach(l => l.classList.remove('active'));
+
+          // Add active class to clicked link
+          this.classList.add('active');
+
+          const text = this.textContent.trim();
+
+          if (text === 'Adicionar') {
+            window.location.href = 'addprodutoADM.html';
+          } else if (text === 'Editar') {
+            showAllProducts();
+          } else if (text === 'PromoÃ§Ãµes') {
+            showPromotionProducts();
+          }
+        });
+      });
+
+      // Event listener for AssistÃªncia button
+      const assistenciaLink = Array.from(document.querySelectorAll('.footer-nav a')).find(a => a.textContent.trim().includes('AssistÃªncia'));
+      if (assistenciaLink) {
+        assistenciaLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('Chamado aberto! Aguarde retorno do assistente.');
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

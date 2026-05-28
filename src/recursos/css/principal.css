@@ -1,0 +1,9 @@
+/* recursos/css/principal.css */
+@import 'base/reset.css';
+@import 'base/tipografia.css';
+@import 'config/_variaveis.css';
+@import 'componentes.css';
+@import 'paginas/splash.css';
+@import 'paginas/login.css';
+@import 'utilities/_helpers.css';
+@import 'utilities/_media-queries.css';

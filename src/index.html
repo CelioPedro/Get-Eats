@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Get Eats e uma aplicacao web de delivery com cardapio, carrinho, pagamento simulado e painel administrativo." />
+    <link rel="icon" type="image/png" href="./assets/logos/GetEatsPNG.png" />
+    <title>Get Eats | Delivery online</title>
+
+    <link rel="stylesheet" href="./recursos/css/principal.css">
+</head>
+<body>
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-screen__loader">
+            <img src="./assets/logos/GetEatsSVG.svg" alt="Get Eats Logo" />
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const splashScreen = document.getElementById('splashScreen');
+            const tempoDeEspera = 1500;
+            const tempoDeTransicao = 700;
+            let redirecionou = false;
+
+            function redirecionar() {
+                if (redirecionou) return;
+                redirecionou = true;
+                splashScreen.classList.add('fade-out');
+
+                setTimeout(() => {
+                    if (window.innerWidth >= 1024) {
+                        window.location.href = './paginas/cardapio.html?openLogin=true';
+                    } else {
+                        window.location.href = './paginas/login.html';
+                    }
+                }, tempoDeTransicao);
+            }
+
+            splashScreen.addEventListener('click', redirecionar);
+            setTimeout(redirecionar, tempoDeEspera);
+        });
+    </script>
+</body>
+</html>
