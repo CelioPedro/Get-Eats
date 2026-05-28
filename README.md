@@ -8,7 +8,9 @@
 
 [Acessar demo](https://luxury-cat-6c9b24.netlify.app/) | [Documentacao do projeto](docs/context-geteats.md) | [Area administrativa](src/admin.html)
 
-![Demonstracao do Get Eats](docs/demo/get-eats-demo.gif)
+<p align="center">
+  <img src="docs/demo/get-eats-demo.gif" alt="Demonstracao do Get Eats" width="900" style="border-radius: 14px;" />
+</p>
 
 ## Visao Geral
 
