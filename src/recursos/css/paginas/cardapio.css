@@ -2766,6 +2766,156 @@
     box-shadow: 0 4px 6px rgba(255, 255, 255, 0.5);
 }
 
+/* Refinamento visual dos modais desktop */
+@media (min-width: 1024px) {
+    .cart-modal-overlay,
+    .pedidos-modal-overlay {
+        background-color: rgba(0, 0, 0, 0.46);
+    }
+
+    .cart-modal-content,
+    .pedidos-modal-content {
+        width: min(27rem, 92vw);
+        background: #f7f7f7;
+        box-shadow: -0.75rem 0 2.25rem rgba(0, 0, 0, 0.18);
+    }
+
+    .cart-modal-header,
+    .pedidos-modal-header,
+    .profile-header {
+        min-height: 4.5rem;
+        padding: 1.25rem 1.5rem;
+        background: white;
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .cart-modal-header h2,
+    .pedidos-modal-header h2,
+    .profile-header h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #222222;
+    }
+
+    .cart-modal-close,
+    .pedidos-modal-close,
+    .close-modal-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #777777;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .cart-modal-close:hover,
+    .pedidos-modal-close:hover,
+    .close-modal-btn:hover {
+        background: #f2f2f2;
+        color: #222222;
+    }
+
+    .cart-modal-body,
+    .pedidos-modal-body,
+    .profile-content {
+        padding: 1.25rem;
+    }
+
+    .cart-coupon-bar,
+    .cart-item,
+    .cart-order-summary,
+    .cart-delivery-address,
+    .payment-summary,
+    .payment-method,
+    .order-details-card,
+    .status-card,
+    .order-details,
+    .delivery-info,
+    .profile-section,
+    .pedidos-tabs,
+    .order-card {
+        border-radius: 0.75rem;
+        border: 1px solid #eeeeee;
+        box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.07);
+    }
+
+    .cart-item,
+    .cart-order-summary,
+    .cart-delivery-address,
+    .order-details-card,
+    .status-card,
+    .order-details,
+    .delivery-info,
+    .profile-section {
+        background: white;
+        padding: 1rem;
+    }
+
+    .cart-finalize-btn,
+    .confirmation-btn.primary,
+    .btn,
+    .tracking-btn,
+    .profile-btn-primary,
+    .logout-btn {
+        border-radius: 0.75rem;
+        box-shadow: 0 0.45rem 1rem rgba(254, 46, 46, 0.22);
+    }
+
+    .btn-secondary,
+    .confirmation-btn.secondary,
+    .profile-btn-secondary,
+    .profile-btn:not(.logout-btn) {
+        border-radius: 0.75rem;
+        border: 1px solid #eeeeee;
+        background: white;
+        box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.07);
+    }
+
+    .modal-content--profile {
+        width: min(27rem, 92vw);
+        max-width: 27rem;
+        margin: 6vh auto;
+        background: #f7f7f7;
+        border-radius: 0.75rem;
+        box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.22);
+        overflow: hidden;
+    }
+
+    .user-info {
+        margin-bottom: 0;
+        border-radius: 0.75rem;
+        background: linear-gradient(180deg, #FE2E2E 48%, #D40403 100%);
+        color: white;
+        box-shadow: 0 0.45rem 1.25rem rgba(254, 46, 46, 0.22);
+    }
+
+    .profile-section {
+        margin-bottom: 0;
+    }
+
+    .profile-actions,
+    .profile-edit-actions,
+    .profile-password-actions {
+        gap: 0.85rem;
+    }
+
+    .profile-btn {
+        height: 3.5rem;
+    }
+
+    .pedidos-tabs {
+        width: 100%;
+        margin-bottom: 1.25rem;
+        background: white;
+    }
+
+    .pedidos-tab {
+        padding: 0.85rem 0.75rem;
+    }
+}
+
 
 /* Extracted from cardapio.html remaining block */
 /* Modal de Filtros */
