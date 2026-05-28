@@ -1,22 +1,77 @@
-# Get Eats
-
-![Status](https://img.shields.io/badge/status-em%20evolucao-ff2e2e?style=for-the-badge)
-![Stack](https://img.shields.io/badge/stack-HTML%20%7C%20CSS%20%7C%20JavaScript-222222?style=for-the-badge)
-![Deploy](https://img.shields.io/badge/deploy-Netlify-00c7b7?style=for-the-badge)
-
-**Get Eats** e uma experiencia web de delivery criada para simular o fluxo completo de uma hamburgueria digital: cardapio, busca, favoritos, carrinho, pagamento, acompanhamento de pedidos, historico por usuario e painel administrativo.
-
-[Acessar demo](https://luxury-cat-6c9b24.netlify.app/) | [Documentacao do projeto](docs/context-geteats.md) | [Area administrativa](src/admin.html)
-
 <p align="center">
-  <img src="docs/demo/get-eats-demo.gif" alt="Demonstracao do Get Eats" width="900" style="border-radius: 14px;" />
+  <img src="src/assets/logos/logo-desktop.svg" alt="Get Eats" width="58" />
 </p>
 
-## Visao Geral
+<h1 align="center">Get Eats</h1>
 
-O projeto nasceu como um trabalho academico de primeiro semestre em Sistemas de Informacao e evoluiu para uma aplicacao de portfolio. A proposta foi construir uma interface completa, responsiva e navegavel usando apenas tecnologias base da web, sem framework e sem backend real.
+<hr />
 
-O foco esta em demonstrar dominio de fluxo de produto, organizacao de telas, persistencia local, responsividade e refinamento visual em diferentes breakpoints.
+<h3 align="center">Delivery web responsivo com cardapio digital, carrinho, pagamento simulado e painel administrativo</h3>
+
+<p align="center">
+  <img src="docs/img/mockup-responsivo.jpg" alt="Mockups responsivos do Get Eats em dispositivos Apple" width="900" />
+</p>
+
+<p align="center">
+  O Get Eats simula uma operacao real de delivery: catalogo de produtos, busca, favoritos,
+  carrinho, checkout, acompanhamento de pedido, historico por usuario e administracao local do cardapio.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Learning-Projeto%20academico-6b7280?style=flat-square" alt="Learning" />
+  <img src="https://img.shields.io/badge/Front-HTML%20%2B%20CSS%20%2B%20JS-2563eb?style=flat-square" alt="Frontend" />
+  <img src="https://img.shields.io/badge/Focus-Delivery%20App-ff2e2e?style=flat-square" alt="Focus" />
+  <img src="https://img.shields.io/badge/Architecture-localStorage%20flow-7c3aed?style=flat-square" alt="Architecture" />
+  <img src="https://img.shields.io/badge/Deploy-Netlify-00c7b7?style=flat-square&logo=netlify&logoColor=white" alt="Deploy Netlify" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Frontend-Live-22c55e?style=flat-square" alt="Frontend live" />
+  <img src="https://img.shields.io/badge/GitHub-Repository-111827?style=flat-square&logo=github&logoColor=white" alt="GitHub repository" />
+  <img src="https://img.shields.io/badge/Status-MVP%20em%20validacao-f59e0b?style=flat-square" alt="Status MVP em validacao" />
+  <img src="https://img.shields.io/badge/Admin-Simulacao%20local-374151?style=flat-square" alt="Admin local" />
+</p>
+
+<p align="center">
+  <a href="https://luxury-cat-6c9b24.netlify.app/">Demo em producao</a>
+  &middot;
+  <a href="docs/context-geteats.md">Documentacao do projeto</a>
+  &middot;
+  <a href="src/admin.html">Area administrativa</a>
+</p>
+
+<p align="center">
+  <img src="docs/demo/get-eats-demo.gif" alt="Demonstracao em GIF do Get Eats" width="900" />
+</p>
+
+> Status: MVP tecnico funcional em validacao. O projeto demonstra fluxo de compra digital, responsividade, persistencia local e experiencia de produto, mas ainda nao deve ser tratado como sistema real de producao sem backend, autenticacao segura, banco de dados e revisao de seguranca.
+
+---
+
+## Stack em destaque
+
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="42" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="42" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="42" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" width="42" />
+  <img src="https://cdn.simpleicons.org/github/white" alt="GitHub" width="42" />
+  <img src="https://cdn.simpleicons.org/netlify/00C7B7" alt="Netlify" width="42" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" alt="Browser APIs" width="42" />
+</p>
+
+## Links
+
+- Frontend em producao: https://luxury-cat-6c9b24.netlify.app/
+- Repositorio: https://github.com/CelioPedro/Get-Eats
+- Documentacao do projeto: [docs/context-geteats.md](docs/context-geteats.md)
+- Entrada administrativa: [src/admin.html](src/admin.html)
+
+## Visao do produto
+
+O Get Eats apresenta uma hamburgueria digital com experiencia completa de navegacao. O usuario pode buscar produtos, favoritar itens, adicionar ao carrinho, aplicar cupom, simular pagamento e acompanhar o status do pedido. O historico de pedidos fica isolado por perfil, reforcando uma experiencia mais consistente entre contas diferentes.
+
+O objetivo deste repositorio e apresentar a evolucao de um projeto academico para uma peca de portfolio com fluxo navegavel, responsividade e comportamento proximo de um produto real.
 
 ## Funcionalidades
 
@@ -31,19 +86,7 @@ O foco esta em demonstrar dominio de fluxo de produto, organizacao de telas, per
 - Painel administrativo para adicionar, editar e remover produtos.
 - Layout responsivo para mobile, tablet e desktop.
 
-## Experiencia
-
-O Get Eats foi pensado como um produto de delivery compacto, com fluxo direto:
-
-1. O usuario acessa o cardapio.
-2. Pesquisa ou filtra produtos.
-3. Favorita itens de interesse.
-4. Adiciona ao carrinho.
-5. Finaliza o pedido.
-6. Acompanha o status da entrega.
-7. Consulta o historico pelo proprio perfil.
-
-## Telas Principais
+## Telas principais
 
 | Area | Descricao |
 | --- | --- |
@@ -55,16 +98,7 @@ O Get Eats foi pensado como um produto de delivery compacto, com fluxo direto:
 | Perfil | Dados do cliente, edicao de perfil, senha e logout. |
 | Admin | Cadastro, edicao e remocao de produtos. |
 
-## Tecnologias
-
-- HTML5
-- CSS3
-- JavaScript
-- `localStorage`
-- Netlify
-- Git e GitHub
-
-## Como Rodar Localmente
+## Como rodar localmente
 
 O projeto e estatico. Voce pode abrir diretamente o arquivo [src/index.html](src/index.html), mas a forma mais estavel e rodar com um servidor local.
 
@@ -79,7 +113,7 @@ Depois acesse:
 http://localhost:8080
 ```
 
-## Area Administrativa
+## Area administrativa
 
 A area administrativa e uma simulacao local para fins academicos e de demonstracao.
 
@@ -105,7 +139,7 @@ Get Eats/
 +-- README.md
 ```
 
-## Decisoes de Implementacao
+## Decisoes de implementacao
 
 - O projeto nao usa backend: sessao, usuarios, favoritos, carrinho e pedidos sao simulados no navegador.
 - O historico de pedidos e separado por usuario usando chaves derivadas do email logado.
@@ -113,11 +147,7 @@ Get Eats/
 - A interface desktop usa modais e paineis laterais para reduzir mudancas bruscas de pagina.
 - A versao mobile prioriza fluxo linear, botoes grandes e navegacao inferior.
 
-## Limitacoes
-
-Este projeto nao deve ser usado como sistema de producao. Senhas, login e dados de pedido sao exemplos locais em `localStorage`, sem criptografia, banco de dados ou autenticacao real.
-
-## Proximas Melhorias
+## Proximas melhorias
 
 - Migrar dados para uma API real.
 - Adicionar testes automatizados de fluxo.
