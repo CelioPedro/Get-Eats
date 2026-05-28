@@ -26,7 +26,7 @@
     <div class="order-details">
       <h2>Detalhes do Pedido</h2>
       <div class="summary-item">
-        <span>N?mero do Pedido:</span>
+        <span>NÃºmero do Pedido:</span>
         <span>#123456</span>
       </div>
       <div class="summary-item">
@@ -34,7 +34,7 @@
         <span>30-45 minutos</span>
       </div>
       <div class="summary-item">
-        <span>Endere?o de Entrega:</span>
+        <span>EndereÃ§o de Entrega:</span>
         <span>Rua Exemplo, 123 - Bairro, Cidade</span>
       </div>
       <hr class="summary-divider">
@@ -45,30 +45,30 @@
     </div>
 
     <button class="btn" id="acompanhar-pedido-btn">Acompanhar Pedido</button>
-    <button class="btn" id="back-to-home">Voltar ao In?cio</button>
+    <button class="btn" id="back-to-home">Voltar ao InÃ­cio</button>
   </div>
 
-  <!-- Incluir scripts necess?rios -->
+  <!-- Incluir scripts necessÃ¡rios -->
   <script src="../recursos/js/auth.js"></script>
   <script src="../recursos/js/carrinho.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Elementos da p?gina
+      // Elementos da pÃ¡gina
       const summaryItems = document.querySelectorAll('.summary-item');
       const numeroPedidoEl = summaryItems[0].querySelector('span:last-child');
       const enderecoEntregaEl = summaryItems[2].querySelector('span:last-child');
       const totalEl = document.querySelector('.summary-total span:last-child');
       const backToHomeBtn = document.getElementById('back-to-home');
 
-      // Gerar n?mero de pedido ?nico
+      // Gerar nÃºmero de pedido Ãºnico
       const numeroPedido = gerarNumeroPedido();
       numeroPedidoEl.textContent = numeroPedido;
 
-      // Obter dados do usu?rio logado
+      // Obter dados do usuÃ¡rio logado
       const usuarioLogado = authManager.obterUsuarioLogado();
 
-      // Obter endere?o de entrega
+      // Obter endereÃ§o de entrega
       const endereco = carrinhoManager.obterEndereco();
       if (endereco) {
         enderecoEntregaEl.textContent = endereco;
@@ -81,22 +81,22 @@
       const totalFormatado = resumoCarrinho.total.toFixed(2).replace('.', ',');
       totalEl.textContent = `R$ ${totalFormatado}`;
 
-      // Salvar total para usar na p?gina de acompanhamento
+      // Salvar total para usar na pÃ¡gina de acompanhamento
       localStorage.setItem('pedido_total_confirmado', totalFormatado);
 
       // Entregadores simulados
       const entregadores = [
-        { nome: 'Jo?o Silva', avatar: 'JS', info: 'Entregador ? Moto ? 5.0 ?' },
-        { nome: 'Maria Santos', avatar: 'MS', info: 'Entregadora ? Carro ? 4.9 ?' },
-        { nome: 'Pedro Costa', avatar: 'PC', info: 'Entregador ? Moto ? 4.8 ?' },
-        { nome: 'Ana Oliveira', avatar: 'AO', info: 'Entregadora ? Bicicleta ? 5.0 ?' }
+        { nome: 'JoÃ£o Silva', avatar: 'JS', info: 'Entregador â€¢ Moto â€¢ 5.0 â˜…' },
+        { nome: 'Maria Santos', avatar: 'MS', info: 'Entregadora â€¢ Carro â€¢ 4.9 â˜…' },
+        { nome: 'Pedro Costa', avatar: 'PC', info: 'Entregador â€¢ Moto â€¢ 4.8 â˜…' },
+        { nome: 'Ana Oliveira', avatar: 'AO', info: 'Entregadora â€¢ Bicicleta â€¢ 5.0 â˜…' }
       ];
 
-      // Atribuir entregador aleat?rio para este pedido
+      // Atribuir entregador aleatÃ³rio para este pedido
       const entregadorIndex = Math.floor(Math.random() * entregadores.length);
       const entregador = entregadores[entregadorIndex];
 
-      // Criar e salvar pedido completo no hist?rico
+      // Criar e salvar pedido completo no histÃ³rico
       const pedidoCompleto = {
         id: numeroPedido.replace('#', ''),
         data: new Date().toISOString(),
@@ -116,10 +116,10 @@
       pedidosAtuais.push(pedidoCompleto);
       localStorage.setItem('pedidos_atuais', JSON.stringify(pedidosAtuais));
 
-      // Limpar carrinho ap?s confirma??o
+      // Limpar carrinho apÃ³s confirmaÃ§Ã£o
       carrinhoManager.limparCarrinho();
 
-      // Event listener para voltar ao in?cio
+      // Event listener para voltar ao inÃ­cio
       if (backToHomeBtn) {
         backToHomeBtn.addEventListener('click', function() {
           window.location.href = 'cardapio.html';
@@ -134,7 +134,7 @@
         });
       }
 
-      // Fun??o para gerar n?mero de pedido ?nico
+      // FunÃ§Ã£o para gerar nÃºmero de pedido Ãºnico
       function gerarNumeroPedido() {
         const timestamp = Date.now();
         const random = Math.floor(Math.random() * 1000);

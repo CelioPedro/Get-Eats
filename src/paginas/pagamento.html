@@ -25,7 +25,7 @@
 
     <div class="form-card__separator">ou</div>
 
-    <label class="input-field__label" for="cartao">N?mero do cart?o</label>
+    <label class="input-field__label" for="cartao">NÃºmero do cartÃ£o</label>
     <div class="input-field">
       <div class="input-field__input">
 
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <label class="input-field__label" for="expiracao">Data de expira??o</label>
+    <label class="input-field__label" for="expiracao">Data de expiraÃ§Ã£o</label>
     <div class="input-field">
       <div class="input-field__input">
         <input type="text" id="expiracao" placeholder="MM/AA" />
@@ -50,7 +50,7 @@
     <label class="input-field__label" for="titular">Nome do titular</label>
     <div class="input-field">
       <div class="input-field__input">
-        <input type="text" id="titular" placeholder="Nome como no cart?o" />
+        <input type="text" id="titular" placeholder="Nome como no cartÃ£o" />
       </div>
     </div>
 
@@ -61,7 +61,7 @@
 
     <div class="form-card__forgot-password">Alterar forma de pagamento</div>
 
-    <!-- Se??o para exibir QR Code e Chave PIX -->
+    <!-- SeÃ§Ã£o para exibir QR Code e Chave PIX -->
     <div id="pix-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90vw; max-width: 400px; padding: 2rem; background: white; border-radius: 0.9375rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; z-index: 1000;">
       <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem; color: #222222;">QR Code PIX</h3>
       <div id="qrcode" style="margin-bottom: 1.5rem; display: flex; justify-content: center;"></div>
@@ -84,7 +84,7 @@
       const confirmPixBtn = document.getElementById('confirm-pix');
 
       pixBtn.addEventListener('click', function() {
-        // Gerar chave PIX aleat?ria (simulando um UUID)
+        // Gerar chave PIX aleatÃ³ria (simulando um UUID)
         const pixKey = generateRandomKey();
         pixKeySpan.textContent = pixKey;
 
@@ -103,7 +103,7 @@
       });
 
       confirmPixBtn.addEventListener('click', function() {
-        // Mudar o bot?o para verde e alterar o texto
+        // Mudar o botÃ£o para verde e alterar o texto
         confirmPixBtn.classList.add('green');
         confirmPixBtn.textContent = 'Pagamento Confirmado';
 
@@ -117,14 +117,14 @@
       copyPixKeyBtn.addEventListener('click', function() {
         const pixKey = pixKeySpan.textContent;
         navigator.clipboard.writeText(pixKey).then(function() {
-          alert('Chave PIX copiada para a ?rea de transfer?ncia!');
+          alert('Chave PIX copiada para a Ã¡rea de transferÃªncia!');
         }).catch(function(err) {
           console.error('Erro ao copiar chave PIX: ', err);
         });
       });
 
       function generateRandomKey() {
-        // Gerar uma string aleat?ria de 32 caracteres (simulando chave PIX)
+        // Gerar uma string aleatÃ³ria de 32 caracteres (simulando chave PIX)
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
         for (let i = 0; i < 32; i++) {

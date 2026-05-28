@@ -31,7 +31,7 @@
 
 
 /* ------------------------------------------- */
-/* 1. OVERLAY (Fundo Escuro e Centraliza??o) */
+/* 1. OVERLAY (Fundo Escuro e CentralizaÃ§Ã£o) */
 /* ------------------------------------------- */
 .modal-overlay {
     position: fixed;
@@ -45,7 +45,7 @@
     /* MODAL OCULTO POR PADRÃƒO */
     display: none; 
     
-    /* Centraliza??o: O display: flex ser? ativado via JS na classe .modal-open */
+    /* CentralizaÃ§Ã£o: O display: flex serÃ¡ ativado via JS na classe .modal-open */
     justify-content: center;
     align-items: center;
 }
@@ -77,7 +77,7 @@
     height: 40px;
     border-radius: 50%;
     margin: 0 auto 10px;
-    padding: 5px; /* Espa?amento interno para o ?cone */
+    padding: 5px; /* EspaÃ§amento interno para o Ã­cone */
 }
 
 .auth-header h2 {
@@ -99,7 +99,7 @@
 }
 
 /* ------------------------------------------- */
-/* 3. FORMUL?RIO E INPUTS */
+/* 3. FORMULÃRIO E INPUTS */
 /* ------------------------------------------- */
 .auth-form {
     display: flex;
@@ -390,9 +390,9 @@
 /* ------------------------------------------- */
 /* 4. CLASSE DE ABERTURA (Adicionada via JS) */
 /* ------------------------------------------- */
-/* Essa classe ser? aplicada ao BODY. Ela torna o modal vis?vel. */
+/* Essa classe serÃ¡ aplicada ao BODY. Ela torna o modal visÃ­vel. */
 .modal-open-auth #auth-modal {
-    display: flex; /* Exibe o overlay e centraliza o conte?do */
+    display: flex; /* Exibe o overlay e centraliza o conteÃºdo */
 }
 
         body {
@@ -401,7 +401,7 @@
             background: #f9f9f9;
             min-height: 100vh;
             padding-bottom: 80px;
-            /* Espa?o para footer fixo */
+            /* EspaÃ§o para footer fixo */
         }
 
         /* Header Superior Vermelho */
@@ -452,7 +452,7 @@
             cursor: pointer;
         }
 
-        /* Conte?do Principal */
+        /* ConteÃºdo Principal */
         .main-content {
             background-color: #f9f9f900;
             width: 90vw;
@@ -558,7 +558,7 @@
             margin-right: 0.25rem;
         }
 
-        /* Navega??o de Categorias (Tabs) */
+        /* NavegaÃ§Ã£o de Categorias (Tabs) */
         .categories {
             display: flex;
             overflow-x: auto;
@@ -730,7 +730,7 @@
             height: 0.75rem;
         }
 
-        /* Bot?o Flutuante Carrinho */
+        /* BotÃ£o Flutuante Carrinho */
         .cart-float {
             position: fixed;
             bottom: 90px;
@@ -770,7 +770,7 @@
             display: none;
         }
 
-        /* Footer Navega??o */
+        /* Footer NavegaÃ§Ã£o */
         .footer-nav {
             position: fixed;
             bottom: 0;
@@ -961,7 +961,7 @@
                 height: 1rem;
             }
 
-            /* Conte?do Principal Tablet */
+            /* ConteÃºdo Principal Tablet */
             .main-content {
                 max-width: 800px;
                 top: 10rem;
@@ -1161,9 +1161,9 @@
             }
 
             .profile-icon--desktop {
-        /* Garante que o ?cone desktop seja vis?vel e tenha o mesmo tamanho do mobile, se houver */
+        /* Garante que o Ã­cone desktop seja visÃ­vel e tenha o mesmo tamanho do mobile, se houver */
         display: block;
-        /* Se precisar de um tamanho espec?fico no desktop: */
+        /* Se precisar de um tamanho especÃ­fico no desktop: */
         width: 24px;
         height: 24px;
     }
@@ -1253,7 +1253,7 @@
 
             }
 
-            /* Anima??o de fade-out no scroll para elementos do header desktop */
+            /* AnimaÃ§Ã£o de fade-out no scroll para elementos do header desktop */
             .header.fade-out .logo-desktop,
             .header.fade-out .header-options,
             .header.fade-out .search-bar,
@@ -1270,7 +1270,7 @@
                 transition: opacity 0.3s ease, transform 0.3s ease;
             }
 
-            /* Conte?do Principal Desktop */
+            /* ConteÃºdo Principal Desktop */
             .main-content {
                 max-width: 1200px;
                 margin: 0 auto;
@@ -1312,7 +1312,7 @@
     padding: 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Alinha o conte?do informativo ao topo */
+    align-items: flex-start; /* Alinha o conteÃºdo informativo ao topo */
     text-decoration: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
@@ -1357,13 +1357,13 @@
     object-fit: contain;
     z-index: 1; /* Deve ser menor que o texto (info) */
 
-    /* VALORES PADRÃƒO - Ajuste fino nas classes espec?ficas */
+    /* VALORES PADRÃƒO - Ajuste fino nas classes especÃ­ficas */
     right: 5px;
     bottom: -25px; /* Desloca a imagem para fora e para baixo */
     width: 150px;
     height: auto;
 
-    /* Sombra que simula a flutua??o do produto, como na Imagem 2 */
+    /* Sombra que simula a flutuaÃ§Ã£o do produto, como na Imagem 2 */
     filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
 }
 
@@ -1372,11 +1372,11 @@
 }
 
 .highlight-card--purple .highlight-image--fries {
-    /* IMPORTANTE: Garanta que position: absolute est? ativo, se n?o estiver j? no .highlight-image */
+    /* IMPORTANTE: Garanta que position: absolute estÃ¡ ativo, se nÃ£o estiver jÃ¡ no .highlight-image */
     position: absolute;
 
-    /* AJUSTES FINAIS: Mantenha os valores que voc? quer */
-    width: 140px !important; /* Use !important apenas para depura??o, se necess?rio */
+    /* AJUSTES FINAIS: Mantenha os valores que vocÃª quer */
+    width: 140px !important; /* Use !important apenas para depuraÃ§Ã£o, se necessÃ¡rio */
     bottom: -45px !important;
     /* Garante que o cone fique com a sombra do efeito */
     filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
@@ -1393,7 +1393,7 @@
     background: linear-gradient(120deg, #7B248D 52%, #A144B6 100%);
 }
 
-/* Ajustes Espec?ficos para Imagens (Ex: Hamb?rguer ? maior, Suco ? mais fino) */
+/* Ajustes EspecÃ­ficos para Imagens (Ex: HambÃºrguer Ã© maior, Suco Ã© mais fino) */
 .highlight-image--burger {
     width: 180px; /* Mais largo */
     bottom: -30px; /* Desloca mais para baixo */
@@ -1833,7 +1833,7 @@
                 height: 1.5rem;
             }
 
-            /* Estilos espec?ficos para o modal de pagamento */
+            /* Estilos especÃ­ficos para o modal de pagamento */
             .payment-summary {
                 margin-bottom: 2rem;
             }
@@ -1968,7 +1968,7 @@
                 margin-top: 0;
             }
 
-            /* Estilos espec?ficos para o modal de confirma??o */
+            /* Estilos especÃ­ficos para o modal de confirmaÃ§Ã£o */
             .confirmation-message {
                 font-size: 1rem;
                 color: #666666;
