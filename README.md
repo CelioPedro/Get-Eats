@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/assets/logos/logo-desktop.svg" alt="Get Eats" width="58" />
+  <img src="docs/img/geteats-readme-logo.png" alt="Get Eats" width="96" />
 </p>
 
 <h1 align="center">Get Eats</h1>
