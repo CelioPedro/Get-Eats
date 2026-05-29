@@ -55,7 +55,7 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" width="42" />
   <img src="https://cdn.simpleicons.org/github/white" alt="GitHub" width="42" />
   <img src="https://cdn.simpleicons.org/netlify/00C7B7" alt="Netlify" width="42" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" alt="Browser APIs" width="42" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" alt="Figma" width="42"/>
 </p>
 
 ## Links
